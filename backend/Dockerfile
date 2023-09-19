@@ -6,10 +6,10 @@ ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE generator.settings
 
 # Set the working directory in the container to /app
-WORKDIR /app
+WORKDIR /code
 
 # Add the current directory . (Django project) to the container at /app
-ADD . /app/
+ADD . /code/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

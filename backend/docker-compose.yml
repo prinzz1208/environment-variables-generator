@@ -2,15 +2,14 @@ version: "3.9"
 
 services:
   db:
-    image: postgres:16rc1-alpine3.18
+    image: mongo:latest
     ports:
-      - "5431:5432"
+      - "27017:27017"
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - ./data/db:/data/db
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
 
   web:
     build: .
@@ -18,9 +17,10 @@ services:
     volumes:
       - .:/code
       - ./temp/:/tmp/
+      - ./requirements.txt:/code/requirements.txt
     ports:
       - "80:80"
     depends_on:
       - db
-    # env_file:
-    #   - ".env.local"
+  #   # env_file:
+  #   #   - ".env.local"
